@@ -30,3 +30,37 @@ jianti_fanti_exchange("廣東", false);
 // 结果:
 // "广东"
 ```
+
+#### sms_regions.php
+
+```json
+[{
+	"region_en_name": "China",
+	"region_cn_name": "中国",
+	"region_code": "CN",
+	"region_no": "86"
+}, {
+	"region_en_name": "Colombia",
+	"region_cn_name": "哥伦比亚",
+	"region_code": "CO",
+	"region_no": "57"
+},
+]
+```
+```php
+[
+  [
+    "region_en_name" => "China",
+    "region_cn_name" => "中国",
+    "region_code"    => "CN",
+    "region_no"      => "86"
+  ],
+  [
+    "region_en_name" => "Colombia",
+    "region_cn_name" => "哥伦比亚",
+    "region_code"    => "CO",
+    "region_no"      => "57"
+  ],
+  ...
+]
+```
