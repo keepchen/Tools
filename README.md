@@ -64,3 +64,16 @@ jianti_fanti_exchange("廣東", false);
   ...
 ]
 ```
+
+#### WeChat.php
+
+```php
+// 获取微信全局access_token
+getWxGlobalAccessToken()
+
+// 公众号|服务号获取微信用户信息
+getWxCode()
+
+// 获取微信小程序码(二进制数据)
+getWxQrCode()
+```
