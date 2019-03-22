@@ -14,16 +14,15 @@ class WeChat
         $response             = Utils::getInstance()->curlGet($url, 5);
         $response_decode      = json_decode($response, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            echo "[!] Error weixin server response invalid data.";
-            return false;
+            exit("[!] Error weixin server response invalid data.");
         }
         if (isset($response_decode["errcode"]) && isset($response_decode["errmsg"])) {
             echo "[!] Warning weixin server response: errcode {" . $response_decode["errcode"] . "} errmsg {" . $response_decode["errmsg"] . "}.";
-            return false;
+            exit(0);
         }
         if (!isset($response_decode["access_token"])) {
             echo "[!] Warning weixin server response: No access_token field.";
-            return false;
+            exit(0);
         }
         $access_token = $response_decode["access_token"];
         SimpleRedisStore::set("global_wx_access_token", $access_token, 60 * 60);
@@ -52,8 +51,8 @@ class WeChat
         if (json_last_error() !== JSON_ERROR_NONE) {
             exit("(0,1)微信接口数据返回错误");
         }
-        if (isset($get_token_response_decode["errormsg"])) {
-            exit("(0,2)微信接口数据返回错误: " . $get_token_response_decode["errormsg"]);
+        if (isset($get_token_response_decode["errmsg"])) {
+            exit("(0,2)微信接口数据返回错误: " . $get_token_response_decode["errmsg"]);
         }
         if (
             !isset($get_token_response_decode["access_token"]) &&
@@ -69,8 +68,8 @@ class WeChat
         if (json_last_error() !== JSON_ERROR_NONE) {
             exit("(0,4)微信接口数据返回错误");
         }
-        if (isset($get_token_response_decode["errormsg"])) {
-            exit("(0,5)微信接口数据返回错误: " . $get_userinfo_response_decode["errormsg"]);
+        if (isset($get_token_response_decode["errmsg"])) {
+            exit("(0,5)微信接口数据返回错误: " . $get_userinfo_response_decode["errmsg"]);
         }
         //3.至此，获取用户信息已完成
 
