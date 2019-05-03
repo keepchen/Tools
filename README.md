@@ -77,3 +77,17 @@ getWxCode()
 // 获取微信小程序码(二进制数据)
 getWxQrCode()
 ```
+
+
+#### decimalConvertN.js
+
+```js
+//十进制转2进制
+decimalConvertN(100, 2);
+
+//十进制转16进制
+decimalConvertN(100, 16);
+
+//十进制转32进制
+decimalConvertN(100, 32);
+
