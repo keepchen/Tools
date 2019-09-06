@@ -100,7 +100,7 @@ decimalConvertN(100, 16);
 
 //十进制转32进制
 decimalConvertN(100, 32);
-
+```
 
 #### copy.js
 
