@@ -10,7 +10,7 @@ function decimalConvertN(num, n) {
 	var remain = 0,
 		current = num,
 		result = [],
-		holders = [0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","x"];
+		holders = [0,1,2,3,4,5,6,7,8,9,"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
 	while(current > 0) {
 		//计算各个权位上的值
