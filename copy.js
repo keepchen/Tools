@@ -19,7 +19,7 @@ function copy(el) {
         el.setSelectionRange(0, attr.length);
     }
     el.focus();
-    //2.excute copy command
+    //2.execute copy command
     if (document.execCommand == undefined) {
         throw Error("[copy] copy failed, `execCommand` not be supported by your browser.");
     }
