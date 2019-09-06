@@ -11,6 +11,7 @@ class WeChat
     {
         $get_access_token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s";
         $url                  = sprintf($get_access_token_url, env("WX_APP_ID", ""), env("WX_APP_SECRET", ""));
+        //curl
         $response             = Utils::getInstance()->curlGet($url, 5);
         $response_decode      = json_decode($response, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -25,6 +26,7 @@ class WeChat
             exit(0);
         }
         $access_token = $response_decode["access_token"];
+        //redis
         SimpleRedisStore::set("global_wx_access_token", $access_token, 60 * 60);
         echo "[^] Info weixin access_token save to cache succeed.";
         exit(0);
@@ -32,7 +34,6 @@ class WeChat
 
     /**
      * @desc 获取微信code后跳转到此方法
-     * @param Request $request
      * @return void
      * @see https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842
      * @extra
@@ -40,12 +41,13 @@ class WeChat
      * 通过访问此链接获取对应公众号|服务号网页授权跳转到获取code的方法(getWxCode)
      * https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
      */
-    public function getWxCode(Request $request)
+    public function getWxCode()
     {
-        $code = $request->get("code");
+        $code = array_key_exists("code", $_REQUEST) ? $_REQUEST["code"] : "";
         //1.获取网页授权access_token
         $get_access_token_url      = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
         $url                       = sprintf($get_access_token_url, env("WX_APP_ID", ""), env("WX_APP_SECRET", ""), $code);
+        //curl
         $get_token_response        = Utils::getInstance()->curlGet($url, 3);
         $get_token_response_decode = json_decode($get_token_response, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -63,6 +65,7 @@ class WeChat
         //2.拉取用户信息
         $get_userinfo_url             = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";
         $url                          = sprintf($get_userinfo_url, $get_token_response_decode["access_token"], $get_token_response_decode["openid"]);
+        //curl
         $get_userinfo_response        = Utils::getInstance()->curlGet($url, 3);
         $get_userinfo_response_decode = json_decode($get_userinfo_response, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -85,6 +88,7 @@ class WeChat
     {
         $get_qrcode_url   = "https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=%s";
         $query_parameters = "id_10000"; //你的参数
+        //redis
         $access_token     = SimpleRedisStore::get("global_wx_access_token");
         if ($access_token == false || $access_token == null) {
             exit("[!] Warning Global Access Token not exist.");
@@ -95,6 +99,7 @@ class WeChat
             "scene"        => $query_parameters,
         ];
         $request_data    = json_encode($attributes);
+        //curl
         $response        = Utils::getInstance()->curlPost($url, $request_data, [], 5);
         $response_decode = json_decode($response, true);
         if (json_last_error() === JSON_ERROR_NONE) {
