@@ -4,6 +4,8 @@
 
 #### hanzi_convert_pinyin.js
 
+> 汉字转拼音
+
 ```js
 // 调用:
 hanzi_convert_pinyin("123，我爱你我的祖国！");
@@ -19,6 +21,8 @@ hanzi_convert_pinyin("123，我爱你我的祖国！", " ");
 
 #### jianti_fanti_exchange.js
 
+> 中文简体繁体转换
+
 ```js
 // 调用:
 jianti_fanti_exchange("广东");
@@ -32,6 +36,8 @@ jianti_fanti_exchange("廣東", false);
 ```
 
 #### sms_regions.php
+
+> 全球手机号地区码
 
 ```json
 [{
@@ -67,6 +73,8 @@ jianti_fanti_exchange("廣東", false);
 
 #### WeChat.php
 
+> 微信相关
+
 ```php
 // 获取微信全局access_token
 getWxGlobalAccessToken()
@@ -81,6 +89,8 @@ getWxQrCode()
 
 #### decimalConvertN.js
 
+> 十进制转N进制
+
 ```js
 //十进制转2进制
 decimalConvertN(100, 2);
@@ -90,4 +100,26 @@ decimalConvertN(100, 16);
 
 //十进制转32进制
 decimalConvertN(100, 32);
+
+
+#### copy.js
+
+> 浏览器复制文本功能
+
+```html
+<!-- html -->
+<span id="copy" data-copy="我要复制的文字">我要复制的文字</span>
+```
+
+```js
+//js usage
+var el = document.getElementById("copy");
+var flag = copy(el);
+if (flag === true) {
+	console.log("succeed");
+} else {
+	console.log("failed");
+}
+```
+
 
