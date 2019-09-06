@@ -1,6 +1,6 @@
 function copy(el) {
     if (typeof el !== "object" || typeof el.getAttribute !== "function") {
-        throw Error("[copy] copy failed, `el` not a element node.");
+        throw new Error("[copy] copy failed, `el` not a element node.");
     }
     var attr = el.getAttribute("data-copy");
     if (attr === null) {
@@ -21,7 +21,7 @@ function copy(el) {
     el.focus();
     //2.execute copy command
     if (document.execCommand == undefined) {
-        throw Error("[copy] copy failed, `execCommand` not be supported by your browser.");
+        throw new Error("[copy] copy failed, `execCommand` not be supported by your browser.");
     }
     var flag = document.execCommand("copy");
     //3.clear selection
