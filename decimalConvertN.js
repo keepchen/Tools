@@ -1,6 +1,6 @@
 //实现将一个10进制数字转换为N(2~36)进制
 function decimalConvertN(num, n) {
-	if (false === /\^d+$/.test(n) || n < 2 || n > 36) {
+	if (false === /^\d+$/.test(n) || n < 2 || n > 36) {
 		throw new Error("错误的进制,无法转换");
 	}
 	if (false === /^\d+$/.test(num)) {
