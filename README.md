@@ -114,10 +114,14 @@ decimalConvertN(100, 32);
 ```js
 //js usage
 var el = document.getElementById("copy");
-var flag = copy(el);
-if (flag === true) {
-	console.log("succeed");
-} else {
+try{
+	var flag = quickCopy(el);
+	if (flag === true) {
+		console.log("succeed");
+	} else {
+		console.log("failed");
+	}
+}catch(Error){
 	console.log("failed");
 }
 ```
