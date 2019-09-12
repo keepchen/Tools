@@ -7,15 +7,14 @@ function quickCopy(el) {
         console.log("[copy] copy failed, `data-copy` attribute not exist.");
         return false;
     }
-    var newEle = document.createElement("input");
+    var newEle = document.createElement("textarea");
     newEle.setAttribute("readonly", "readonly");
-    newEle.setAttribute("value", attr);
+    newEle.value = attr;
     newEle.style.opcity="0";
-    newEle.style.position="fixed";
-    newEle.style.top="-1000px";
-    newEle.style.zIndex="-1";
-    document.body.appendChild(newEle);
+    el.parentElement.appendChild(newEle);
     //1.select
+    newEle.select();
+    // newEle.focus();
     if (newEle.createTextRange) {
         //IE
         var selRange = newEle.createTextRange();
@@ -25,14 +24,12 @@ function quickCopy(el) {
     } else if (newEle.setSelectionRange) {
         newEle.setSelectionRange(0, attr.length);
     }
-    newEle.focus();
-    newEle.select();
     //2.excute copy command
     if (document.execCommand == undefined) {
         throw new Error("[copy] copy failed, `execCommand` not be supported by your browser.");
     }
-    var flag = document.execCommand("copy");
-    document.body.removeChild(newEle);
+    var flag = document.execCommand("Copy");
+    el.parentElement.removeChild(newEle);
     //3.clear selection
     if ("getSelection" in window) {
         window.getSelection().removeAllRanges();
