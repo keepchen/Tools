@@ -109,7 +109,7 @@ decimalConvertN(100, 32);
 ```html
 <!-- html -->
 <span id="copy" data-copy="我要复制的文字">我要复制的文字</span>
-<script type="text/javascript" src="./quick-copy.min.js"></script>
+<script type="text/javascript" src="./quick-copy.js"></script>
 ```
 
 ```js
