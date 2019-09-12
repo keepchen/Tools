@@ -102,13 +102,14 @@ decimalConvertN(100, 16);
 decimalConvertN(100, 32);
 ```
 
-#### copy.js
+#### quick-copy.js
 
 > 浏览器复制文本功能
 
 ```html
 <!-- html -->
 <span id="copy" data-copy="我要复制的文字">我要复制的文字</span>
+<script type="text/javascript" src="./quick-copy.min.js"></script>
 ```
 
 ```js
